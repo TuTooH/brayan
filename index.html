@@ -864,6 +864,16 @@ function armarCandado(){
 }
 
 let abierto = false;
+let musica = null;
+
+function iniciarMusica(){
+  if (musica) return;
+
+  musica = new Audio("Guns N' Roses - November Rain.mp3");
+  musica.loop = true;
+  musica.volume = .35;
+  musica.play().catch(() => { musica = null; });
+}
 
 function comprobarClave(){
   if (abierto) return;
@@ -974,6 +984,8 @@ function abrirCarta(){
   const portal = document.getElementById("portal");
   const btnSi  = document.getElementById("btnSi");
   const caja   = btnSi.getBoundingClientRect();
+
+  iniciarMusica();
 
   // La explosión sale del propio botón que acaba de tocar.
   explotarCorazones(caja.left + caja.width / 2, caja.top + caja.height / 2);
